@@ -1,0 +1,209 @@
+/* AboutSection.module.css */
+
+.section {
+  background: #030303;
+  padding: 7rem 2rem 5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(15,188,170,0.25), transparent);
+}
+
+.bgGrid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+  margin-bottom: 5rem;
+}
+
+/* ── Text Column ──────────────────── */
+.textCol {}
+
+.eyebrowRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.2rem;
+}
+
+.eyebrowLine {
+  display: inline-block;
+  width: 28px; height: 1px;
+  background: var(--color-accent);
+}
+
+.eyebrow {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  color: var(--color-accent);
+  text-transform: uppercase;
+}
+
+.title {
+  font-family: var(--font-primary);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+}
+
+.titleAccent { color: var(--color-accent); }
+
+.body {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.8;
+  margin-bottom: 1.2rem;
+  font-weight: 300;
+}
+
+.certRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.certBadge {
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  font-weight: 600;
+  color: var(--color-accent);
+  border: 1px solid rgba(15,188,170,0.35);
+  padding: 0.35rem 0.85rem;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+
+/* ── Right Column — Stats ─────────── */
+.rightCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.statCard {
+  padding: 2.5rem 2rem;
+  background: #080808;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: background 0.3s;
+}
+
+.statCard:hover {
+  background: #0e0e0e;
+}
+
+.statValue {
+  font-family: var(--font-primary);
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--color-accent);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.statLabel {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.08em;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+/* ── Values Row ──────────────────── */
+.valuesContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.valuesTitle {
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  letter-spacing: -0.01em;
+}
+
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.valueCard {
+  padding: 2rem 1.75rem;
+  background: #080808;
+  transition: background 0.3s;
+}
+
+.valueCard:hover {
+  background: #0e0e0e;
+}
+
+.valueIcon {
+  width: 40px; height: 40px;
+  color: var(--color-accent);
+  margin-bottom: 1rem;
+}
+
+.valueTitle {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.6rem;
+}
+
+.valueDesc {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* ── Responsive ──────────────────── */
+@media (max-width: 960px) {
+  .container { grid-template-columns: 1fr; gap: 3rem; }
+  .valuesGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px) {
+  .valuesGrid { grid-template-columns: 1fr; }
+  .statsGrid { grid-template-columns: 1fr 1fr; }
+  .section { padding: 5rem 1.25rem 4rem; }
+}

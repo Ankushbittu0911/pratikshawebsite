@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --color-bg: #000000;
+  --color-surface: #0a0a0a;
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-text-primary: #ffffff;
+  --color-text-secondary: rgba(255, 255, 255, 0.55);
+
+  /* Brand colors extracted from logo — teal-to-green gradient */
+  --color-accent: #0fbcaa;          /* primary teal */
+  --color-accent-2: #38c96b;        /* secondary green */
+  --color-accent-dark: #0a8a7c;     /* deeper teal */
+  --color-accent-dim: rgba(15, 188, 170, 0.12);
+  --color-glow: rgba(15, 188, 170, 0.3);
+  --color-glow-green: rgba(56, 201, 107, 0.25);
+
+  /* Gradient helpers */
+  --gradient-brand: linear-gradient(135deg, #0fbcaa 0%, #38c96b 100%);
+  --gradient-brand-subtle: linear-gradient(135deg, rgba(15,188,170,0.15) 0%, rgba(56,201,107,0.08) 100%);
+
+  --font-primary: 'Outfit', 'Inter', sans-serif;
+  --font-secondary: 'Inter', sans-serif;
+  --navbar-height: 68px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  overscroll-behavior: none;
+  scroll-padding-top: var(--navbar-height);
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #000;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #000; }
+::-webkit-scrollbar-thumb {
+  background: rgba(15, 188, 170, 0.4);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--color-accent); }
+
+img { max-width: 100%; height: auto; }
+
+/* Hide Next.js dev overlay button (the "N" icon) */
+nextjs-portal,
+[data-nextjs-dialog-overlay],
+button[data-nextjs-toast-errors-hide-button],
+#__next-build-watcher,
+#__nextjs__container__errors__indicator {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+

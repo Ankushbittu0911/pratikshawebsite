@@ -1,0 +1,586 @@
+/* ═══════════════════════════════════════════════════════════════
+   HeroSection.module.css — Pratiksha Technologies Cinematic Hero
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Loading Screen ────────────────────────────────────────────── */
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.loaderHide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loaderInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.loaderLogo {
+  font-family: var(--font-primary);
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: 0.3em;
+  color: #fff;
+}
+
+.loaderLogoAccent {
+  color: var(--color-accent);
+}
+
+.loaderBar {
+  width: 240px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.loaderFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-2));
+  border-radius: 1px;
+  transition: width 0.15s ease-out;
+  box-shadow: 0 0 12px rgba(15,188,170, 0.6);
+}
+
+.loaderPercent {
+  font-size: 0.75rem;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  color: var(--color-accent);
+  font-family: 'Inter', monospace;
+}
+
+.loaderSub {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.25);
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
+/* ── Hero Container ─────────────────────────────────────────────── */
+.heroContainer {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+}
+
+/* ── Canvas ─────────────────────────────────────────────────────── */
+.heroCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 1;
+}
+
+/* ── Ambient Glow Layers ────────────────────────────────────────── */
+.ambientTopGlow {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 300px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(15,188,170, 0.06) 0%,
+    transparent 70%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+.ambientBottomGlow {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 250px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(64, 156, 255, 0.07) 0%,
+    transparent 70%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Subtle CRT scanline effect */
+.scanline {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.025) 2px,
+    rgba(0, 0, 0, 0.025) 4px
+  );
+}
+
+/* ── Navbar ─────────────────────────────────────────────────────── */
+.navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.8rem 3rem;
+  /* Glassmorphism bar */
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.6) 0%,
+    transparent 100%
+  );
+  backdrop-filter: blur(0px);
+}
+
+.navLogo {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: #fff;
+}
+
+.navLogoAccent {
+  color: var(--color-accent);
+  font-size: 1.2rem;
+}
+
+.navLogoDivider {
+  display: inline-block;
+  width: 1px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.25);
+  margin: 0 0.5rem;
+}
+
+.navLogoSub {
+  font-size: 0.65rem;
+  font-weight: 300;
+  letter-spacing: 0.35em;
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: 2px;
+}
+
+.navLinks {
+  display: flex;
+  list-style: none;
+  gap: 2.5rem;
+}
+
+.navLink {
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.25s ease;
+}
+
+.navLink:hover {
+  color: #fff;
+}
+
+/* ── Tagline Badge ──────────────────────────────────────────────── */
+.taglineBadge {
+  position: absolute;
+  top: 2rem;
+  right: 3rem;
+  z-index: 21;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.35);
+  text-transform: uppercase;
+  font-weight: 400;
+  /* hidden behind nav on mobile */
+}
+
+.taglineDot {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow: 0 0 8px var(--color-accent);
+  animation: pulseDot 2s ease-in-out infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.7); }
+}
+
+/* ── Text Overlay Base ──────────────────────────────────────────── */
+.textOverlay {
+  position: absolute;
+  z-index: 15;
+  will-change: transform, opacity;
+  transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  max-width: min(640px, 90vw);
+}
+
+/* Position variants */
+.pos_center {
+  left: 50%;
+  bottom: 14%;
+  transform: translateX(-50%) translateY(0);
+  text-align: center;
+}
+
+.pos_bottom_left {
+  left: 5%;
+  bottom: 10%;
+  text-align: left;
+}
+
+.pos_top_right {
+  right: 5%;
+  top: 20%;
+  text-align: right;
+}
+
+/* ── Text Visibility States ─────────────────────────────────────── */
+.textIn {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.textOut {
+  opacity: 0;
+  transform: translateX(-50%) translateY(18px);
+}
+
+/* Fix non-center position transforms */
+.pos_bottom_left.textIn  { transform: translateX(0) translateY(0); }
+.pos_bottom_left.textOut { transform: translateX(0) translateY(18px); }
+.pos_top_right.textIn    { transform: translateX(0) translateY(0); }
+.pos_top_right.textOut   { transform: translateX(0) translateY(-18px); }
+
+/* ── Segment Indicator (dots) ───────────────────────────────────── */
+.segmentIndicator {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 1.2rem;
+}
+
+.pos_center .segmentIndicator,
+.pos_top_right .segmentIndicator {
+  justify-content: inherit;
+}
+
+.segmentDot {
+  width: 20px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 1px;
+  transition: background 0.4s ease, width 0.4s ease;
+}
+
+.segmentDotActive {
+  background: var(--color-accent);
+  width: 36px;
+  box-shadow: 0 0 6px rgba(15,188,170, 0.5);
+}
+
+/* ── Eyebrow Row ─────────────────────────────────────────────────── */
+.eyebrowRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.9rem;
+}
+
+.pos_center .eyebrowRow {
+  justify-content: center;
+}
+
+.pos_top_right .eyebrowRow {
+  justify-content: flex-end;
+}
+
+.eyebrowLine {
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.eyebrow {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  color: var(--color-accent);
+  text-transform: uppercase;
+}
+
+/* ── Headline ────────────────────────────────────────────────────── */
+.headline {
+  font-family: var(--font-primary);
+  font-size: clamp(2.4rem, 5vw, 5.2rem);
+  font-weight: 800;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 0.05em;
+  margin-bottom: 1.1rem;
+  text-shadow:
+    0 2px 40px rgba(0, 0, 0, 0.8),
+    0 0 80px rgba(0, 0, 0, 0.4);
+}
+
+.headlineLine {
+  display: block;
+}
+
+/* ── Subline ─────────────────────────────────────────────────────── */
+.subline {
+  font-size: clamp(0.85rem, 1.5vw, 1.05rem);
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 2rem;
+  text-shadow: 0 1px 20px rgba(0, 0, 0, 0.8);
+  max-width: 400px;
+}
+
+.pos_center .subline {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── CTA Buttons ─────────────────────────────────────────────────── */
+.ctaRow {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.pos_center .ctaRow {
+  justify-content: center;
+}
+
+.ctaPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.8rem;
+  background: var(--color-accent);
+  color: #000;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: background 0.25s, box-shadow 0.25s, transform 0.2s;
+  box-shadow: 0 0 24px rgba(15,188,170, 0.35);
+}
+
+.ctaPrimary:hover {
+  background: var(--color-accent-2);
+  box-shadow: 0 0 40px rgba(15,188,170, 0.55);
+  transform: translateY(-1px);
+}
+
+.ctaSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.8rem;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 2px;
+  transition: border-color 0.25s, color 0.25s, background 0.25s;
+}
+
+.ctaSecondary:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* ── Scroll Hint ─────────────────────────────────────────────────── */
+.scrollHint {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  transition: opacity 0.5s ease;
+}
+
+.scrollHintHide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.scrollMouse {
+  width: 22px;
+  height: 34px;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  border-radius: 11px;
+  display: flex;
+  justify-content: center;
+  padding-top: 5px;
+}
+
+.scrollWheel {
+  width: 3px;
+  height: 7px;
+  background: var(--color-accent);
+  border-radius: 2px;
+  animation: scrollBounce 1.6s ease-in-out infinite;
+}
+
+@keyframes scrollBounce {
+  0%, 100% { opacity: 1; transform: translateY(0); }
+  50% { opacity: 0.3; transform: translateY(6px); }
+}
+
+.scrollLabel {
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  color: rgba(255, 255, 255, 0.3);
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+/* ── Frame Counter ───────────────────────────────────────────────── */
+.frameCounter {
+  position: absolute;
+  bottom: 2.4rem;
+  right: 3rem;
+  z-index: 20;
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+  font-family: 'Inter', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.frameCounterLabel {
+  font-size: 0.5rem;
+  letter-spacing: 0.3em;
+  color: rgba(255, 255, 255, 0.2);
+  text-transform: uppercase;
+  margin-right: 4px;
+}
+
+.frameCounterNum {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  letter-spacing: 0.05em;
+}
+
+.frameCounterSep {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.15);
+  margin: 0 1px;
+}
+
+.frameCounterTotal {
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.2);
+  letter-spacing: 0.05em;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1.4rem 1.5rem;
+  }
+
+  .navLinks {
+    display: none;
+  }
+
+  .taglineBadge {
+    display: none;
+  }
+
+  .textOverlay {
+    max-width: 90vw;
+  }
+
+  .pos_top_right {
+    right: 4%;
+    top: 16%;
+    text-align: left;
+  }
+
+  .pos_top_right .eyebrowRow {
+    justify-content: flex-start;
+  }
+
+  .headline {
+    font-size: clamp(1.8rem, 8vw, 3rem);
+  }
+
+  .frameCounter {
+    right: 1.5rem;
+    bottom: 1.5rem;
+  }
+
+  .ctaRow {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .pos_center {
+    bottom: 16%;
+  }
+
+  .pos_bottom_left {
+    left: 4%;
+    bottom: 12%;
+  }
+}

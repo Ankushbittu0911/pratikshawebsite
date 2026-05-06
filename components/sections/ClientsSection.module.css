@@ -1,0 +1,295 @@
+/* ClientsSection.module.css — Premium animated client grid */
+
+.section {
+  background: #000;
+  padding: 7rem 2rem 6rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(15,188,170,0.3), transparent);
+}
+
+/* ── Background subtle texture ── */
+.section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
+}
+
+/* ── Header ──────────────────────────────── */
+.header {
+  text-align: center;
+  max-width: 620px;
+  margin: 0 auto 4.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.eyebrowRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.eyebrowLine {
+  flex: 1;
+  max-width: 40px;
+  height: 1px;
+  background: var(--color-accent);
+  opacity: 0.5;
+}
+
+.eyebrow {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  color: var(--color-accent);
+  text-transform: uppercase;
+}
+
+.title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.08;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.titleAccent {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.sub {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.38);
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+/* ── Client Grid ──────────────────────────── */
+.clientGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  max-width: 1200px;
+  margin: 0 auto 5rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Client Card ──────────────────────────── */
+.clientCard {
+  position: relative;
+  padding: 2rem 1.75rem;
+  background: #080808;
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: default;
+
+  /* Initial state — hidden */
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s ease,
+    border-color 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* Visible state — triggered by IntersectionObserver */
+.cardVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.clientCard:hover {
+  background: #0d0d0d;
+  border-color: var(--card-accent, var(--color-accent));
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--card-accent, var(--color-accent)) 20%, transparent),
+    0 12px 40px rgba(0,0,0,0.4),
+    0 0 30px color-mix(in srgb, var(--card-accent, var(--color-accent)) 8%, transparent);
+}
+
+/* ── Animated corner lines ── */
+.cardCornerTL,
+.cardCornerBR {
+  position: absolute;
+  width: 18px; height: 18px;
+  pointer-events: none;
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+.cardCornerTL {
+  top: 8px; left: 8px;
+  border-top: 1.5px solid var(--card-accent, var(--color-accent));
+  border-left: 1.5px solid var(--card-accent, var(--color-accent));
+  opacity: 0;
+  transition: opacity 0.3s ease, width 0.3s, height 0.3s;
+}
+
+.cardCornerBR {
+  bottom: 8px; right: 8px;
+  border-bottom: 1.5px solid var(--card-accent, var(--color-accent));
+  border-right: 1.5px solid var(--card-accent, var(--color-accent));
+  opacity: 0;
+  transition: opacity 0.3s ease, width 0.3s, height 0.3s;
+}
+
+.clientCard:hover .cardCornerTL,
+.clientCard:hover .cardCornerBR {
+  opacity: 1;
+  width: 24px; height: 24px;
+}
+
+/* ── Card content ── */
+.cardIndex {
+  display: block;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.18);
+  margin-bottom: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  transition: color 0.3s;
+}
+
+.clientCard:hover .cardIndex {
+  color: var(--card-accent, var(--color-accent));
+}
+
+.cardSector {
+  display: inline-block;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 100px;
+  background: color-mix(in srgb, currentColor 10%, transparent);
+  border: 1px solid color-mix(in srgb, currentColor 25%, transparent);
+}
+
+.cardName {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  transition: color 0.3s;
+}
+
+/* ── Glow ── */
+.cardGlow {
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 120px; height: 120px;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--card-accent, var(--color-accent)) 15%, transparent) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.clientCard:hover .cardGlow { opacity: 1; }
+
+/* ── Testimonials ──────────────────────────── */
+.testimonialGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.testimonialCard {
+  background: #080808;
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 8px;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  transition: background 0.3s, border-color 0.3s, transform 0.3s;
+}
+
+.testimonialCard:hover {
+  background: #0d0d0d;
+  border-color: rgba(15,188,170,0.15);
+  transform: translateY(-3px);
+}
+
+.quoteIconWrap {
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.quoteText {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.85;
+  font-weight: 300;
+  font-style: italic;
+  flex: 1;
+}
+
+.quoteMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.quoteAuthor {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.quoteRole {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.28);
+  letter-spacing: 0.05em;
+}
+
+/* ── Responsive ────────────────────────────── */
+@media (max-width: 1024px) {
+  .clientGrid { grid-template-columns: repeat(2, 1fr); }
+  .testimonialGrid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .clientGrid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .section { padding: 5rem 1.25rem 4rem; }
+}
+
+@media (max-width: 400px) {
+  .clientGrid { grid-template-columns: 1fr; }
+}
